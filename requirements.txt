@@ -2,4 +2,6 @@ altair
 numpy
 pandas
 pydeck
+torch
+torchvision
 streamlit
