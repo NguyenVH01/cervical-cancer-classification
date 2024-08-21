@@ -14,11 +14,14 @@ MODEL_NAME = "cancer_best_model.pth"
 
 
 def predict(model_name, img_path):
+    print('===================')
+    print(f'Model name: {MODEL_NAME}')
+    print('===================')
     # load the model
-    model = models.resnet152(pretrained=True)
-    model.fc = nn.Linear(in_features=2048, out_features=5, bias=True)
+    model = models.resnet18(pretrained=True)
+    model.fc = nn.Linear(in_features=256, out_features=4, bias=True)
 
-    weights = torch.load(model_name,map_location ='cpu')
+    weights = torch.load(MODEL_NAME, map_location ='cpu')
     model.load_state_dict(weights)
 
     # preprocess the image
