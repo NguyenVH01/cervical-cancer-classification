@@ -8,18 +8,16 @@ import ssl
 
 ssl._create_default_https_context = ssl._create_stdlib_context
 
-CLASS_NAMES = ['Dyskeratotic',
- 'Koilocytotic',
- 'Metaplastic',
- 'Parabasal',
- 'Superficial-Intermediate']
-MODEL_NAME = "model_weights.pth"
+CLASS_NAMES = ["High squamous intra-epithelial lesion","Low squamous intra-epithelial lesion",
+           "Negative for Intraepithelial malignancy","/content/dataset/Squamous cell carcinoma"]
+MODEL_NAME = "cancer_best_model.pth"
 
 
 def predict(model_name, img_path):
     # load the model
-    model = models.resnet152(pretrained=True)
-    model.fc = nn.Linear(in_features=2048, out_features=5, bias=True)
+    model = models.resnet18(pretrained=True)
+    num_ftrs = model.fc.in_features
+    model.fc = nn.Linear(in_features=num_ftrs, out_features=4, bias=True)
 
     weights = torch.load(model_name,map_location ='cpu')
     model.load_state_dict(weights)
