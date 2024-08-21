@@ -24,7 +24,7 @@ def predict(model_name, img_path):
 
 
     weights = torch.load(MODEL_NAME, map_location ='cpu')
-    model_ft.load_state_dict(weights)
+    model_ft.load_state_dict(weights, strict=False)
 
 
 
