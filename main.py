@@ -18,9 +18,15 @@ def predict(model_name, img_path):
     print(f'Model name: {MODEL_NAME}')
     print('===================')
     # load the model
-    model = models.resnet18(pretrained=True, num_classes=4)
+    model_ft = models.resnet18(pretrained=True)
+    num_ftrs = model_ft.fc.in_features
+    model_ft.fc = nn.Linear(num_ftrs, 4)  # make the change
+
+
     weights = torch.load(MODEL_NAME, map_location ='cpu')
-    model.load_state_dict(weights)
+    model_ft.load_state_dict(weights)
+
+
 
     # preprocess the image
     prep_img_mean = [0.485, 0.456, 0.406]
@@ -36,8 +42,8 @@ def predict(model_name, img_path):
     preprocessed_image = transform(image).unsqueeze(0)
 
     # predict the class
-    model.eval()
-    output = model(preprocessed_image)
+    model_ft.eval()
+    output = model_ft(preprocessed_image)
     pred_idx = torch.argmax(output, dim=1)
     predicted_class = CLASS_NAMES[pred_idx]
     return predicted_class
