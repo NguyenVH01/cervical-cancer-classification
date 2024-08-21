@@ -18,9 +18,7 @@ def predict(model_name, img_path):
     print(f'Model name: {MODEL_NAME}')
     print('===================')
     # load the model
-    model = models.resnet18(pretrained=True)
-    model.fc = nn.Linear(in_features=256, out_features=4, bias=True)
-
+    model = models.resnet18(pretrained=True, num_classes=4)
     weights = torch.load(MODEL_NAME, map_location ='cpu')
     model.load_state_dict(weights)
 
