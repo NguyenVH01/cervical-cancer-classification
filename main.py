@@ -8,8 +8,8 @@ import ssl
 
 ssl._create_default_https_context = ssl._create_stdlib_context
 
-CLASS_NAMES = ["High squamous intra-epithelial lesion","Low squamous intra-epithelial lesion",
-           "Negative for Intraepithelial malignancy","/content/dataset/Squamous cell carcinoma"]
+CLASS_NAMES = ["HSIL","LSIL",
+           "NILM","SCC"]
 MODEL_NAME = "cancer_best_model.pth"
 
 
