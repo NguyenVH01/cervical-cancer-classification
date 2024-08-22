@@ -44,6 +44,7 @@ def predict(model_name, img_path):
     # predict the class
     model_ft.eval()
     output = model_ft(preprocessed_image)
+    print(output)
     pred_idx = torch.argmax(output, dim=1)
     predicted_class = CLASS_NAMES[pred_idx]
     return predicted_class
