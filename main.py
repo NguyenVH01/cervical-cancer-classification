@@ -23,7 +23,7 @@ def predict(model_name, img_path):
     model_ft.fc = nn.Linear(num_ftrs, 4)  # make the change
 
 
-    weights = torch.load(MODEL_NAME, map_location ='cpu')
+    weights = torch.load(MODEL_NAME, map_location ='cpu', weights_only=True)
     model_ft.load_state_dict(weights, strict=False)
 
 
